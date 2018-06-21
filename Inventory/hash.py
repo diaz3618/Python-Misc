@@ -1,80 +1,51 @@
 import pickle
 
-def skuFile(data):
-        data = []
-        with open("sku.inv", "wb") as fp:
+def save(data = [], filename = ""):
+        with open(filename, "wb") as fp:
                 pickle.dump(data, fp)
-        with open("sku.inv", "rb") as fp:
-                _data = pickle.load(fp)
-        print(_data)
+##        with open(filename, "rb") as fp:
+##                _data = pickle.load(fp)
+##      print(_data)      
 
+def load(filename = ""):
+        try:
+                with open(filename, "rb") as fp:
+                        _data = pickle.load(fp)
+                return _data
+        except:
+                return None
+#def clear(filename = ""):
+        
 def main():
-        sku = []
-        with open('sku.inv') as f:
-                sku = f.read().splitlines()
-        print("[+]Loaded: " + str(sku))
-                
-        addSku = str(input("SKU: "))
-        addQty = int(input("Qty: "))
+        sku = load("sku.inv")
+        qty = [56, 52, 34, 56, 56]
 
-                
-        #sku = ['249-666', '256-276', '234-534']
-        _insert(sku, addSku)
+        """
+        Insert to lists.
+        """
+        aSku = str(input("Sku: "))
+        if aSku in sku == False:
+                _insert(sku, aSku)
         
-        qty = [56, 52, 34]
-        _insert(qty, addQty)
-        
+        aQty = str(input("Qty: "))
+        if aQty in qty == False:
+                _insert(qty, aQty)
+
+
+        """
+        Save to files, and print to verify.
+        """
+        save(sku, "sku.inv")
+        save(qty, "qty.inv")
+        print("Sku: " + str(sku))
+        print("Qty: " + str(qty))
+
+
+        """
+        Hash
+        """
         hash = {k:v for k, v in zip(sku, qty)}
-
-
-        test(sku)
-
-
-        """
-        Print files
-        """
-        wFile(str(hash), "data.inv")
-        wFile(str(qty), "qty.inv")
-
-
-
-
-
-
-
-def test(sku):
-        """
-        Print to verify
-        """
-        print()
-        print("In list: " + str(sku))
-
-        """
-        Write to files
-        """
-        for items in sku:
-                sTest = sku.replace("[", "")
-                wFile(str(sTest), "sku.inv")
-
-        # Print file to verify
-        f = open("sku.inv", "r")
-        print
-        if f.mode == "r":
-                read = f.read()
-                print("In file: " + str(read))
-
-
-
-
-
-
-                
-def wFile(data, fileName, append = False):
-        if append == True:
-                f = open(fileName, "a+")
-        f = open(fileName, "w+")
-        f.write(data)
-        f.close()
+        print("Hash: " + str(hash['249-666']))
 
 def _insert(var, val):
         var.append(val)
