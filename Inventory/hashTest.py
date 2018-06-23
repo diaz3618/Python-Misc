@@ -63,8 +63,8 @@ def removeKey():
 		hash = r
 		save(hash, "hash.inv")
 
-		print("New \"hash.inv\":")
-		printData("hash.inv")
+		print("\n\nNew \"hash.inv\":")
+		#printData("hash.inv")
 
 def find():
 	while True:
@@ -155,11 +155,16 @@ def test():
 			printData("hash.inv")
 			return False
 		"""
+
 		# Add quantity
 		qty = int(input("    Qty: "))
+		if sku in hash:
+			hash[str(sku)] += qty
+		else:
+			hash[str(sku)] = qty
 		
 		# Add new entry to hash dictionary
-		hash[str(sku)] = qty
+		###hash[str(sku)] = qty
 		
 		# Save and print for confirmation
 		save(hash, "hash.inv")
