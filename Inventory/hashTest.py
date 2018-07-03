@@ -1,4 +1,7 @@
 """
+Ideas:
+- Change from binary file to cvs file so it can be opened in excel.
+
 Daniel Diaz Santiago
 6/21/2018
 
