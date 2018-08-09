@@ -87,7 +87,7 @@ Module functions end
 """
 Testing functions
 """
-def options():
+def options():        
 	print("""rm\t\t Remove entry
 add\t\t Insert entry
 cat\t\t Print \"hash.inv\" file
@@ -103,7 +103,7 @@ def menu():
 	hash = load("hash.inv")
 	header()
 	while True:
-		choice = str(input("#: "))
+		choice = str(input("inv> "))
 		
 		if choice.lower() == "rm":
 			removeKey()
