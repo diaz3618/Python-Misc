@@ -41,8 +41,12 @@ def main():
     work_hrs = float(input("Work hours: "))
     mins = time_vault(work_hrs * 60)
 
+    m1 = 0
+    for i in range(0,mins):
+        m1 += 1
+
     print(line.format("\n\nWorked:", str(work_hrs), "hrs"))
-    print(line.format("Wallet:", "$", str(round(PPM * mins, 3))))
+    print(line.format("Wallet:", "$", str(round(PPM * m1, 3))))
 
 if __name__ == "__main__":
     main()
