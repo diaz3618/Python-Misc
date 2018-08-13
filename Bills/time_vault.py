@@ -1,5 +1,5 @@
 from datetime import datetime
-from crontab import CronTab
+import schedule
 import time
 RATE = 11.60
 PPM = RATE / 60
@@ -15,28 +15,32 @@ def main():
     print(line.format("Wallet:", "$", str(round(PPM * mins, 3))))
 
 
+def job(t):
+    print("I'm working..."), t
+    return
+
+
 def time_controller(mins):
-    cron = CronTab(user=True)
-    job  = cron.new(time_vault(mins))
-    job.minute.during(5,50).every(5)
-    job.hour.every(4)
-    job.day.on(4, 5, 6)
+    schedule.every().day.at("22:48").do(job,'It is 01:00')
 
-    job.dow.on('SUN')
-    job.dow.on('SUN', 'FRI')
-    job.month.during('APR', 'NOV')
+    while True:
+        schedule.run_pending()
+        time.sleep(60) # wait one minute
 
-    
+    """
     now = datetime.now().strftime('%I:%M:%S %p')
-    shift_start = datetime.strptime("09:15:00 PM", "%I:%M:%S %p")
+    hrs = datetime.now().hour
+    mins = datetime.now().minute
+    secs = datetime.now().second
     print(now)
-    print(shift_start)
     while str(now) != '09:14:00 PM':
+        #print(secs) 
         #print("Waiting...")
 
         if str(now) == '09:14:00 PM':
             print("Time is now: " + str(now))
             break
+    """
 
 
 def time_vault(_max):
